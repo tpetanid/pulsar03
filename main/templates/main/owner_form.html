@@ -1,0 +1,107 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ title }} - Pulsar{% endblock %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+        <h1 class="text-xl font-semibold text-gray-900 dark:text-white">{{ title }}</h1>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            {% if title == 'Add Owner' %}
+            Enter the owner's information below.
+            {% else %}
+            Update the owner's information below.
+            {% endif %}
+        </p>
+    </div>
+    
+    <div class="border-t border-gray-200 dark:border-gray-700">
+        <form method="post" class="px-4 py-5 sm:p-6">
+            {% csrf_token %}
+            
+            <div class="space-y-6">
+                <!-- Personal Information -->
+                <div class="border-b border-gray-900/10 dark:border-gray-700 pb-6">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900 dark:text-white">Owner Information</h2>
+                    <p class="mt-1 text-sm leading-6 text-gray-500 dark:text-gray-400">Provide the owner's contact details.</p>
+                    
+                    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                        <!-- First Name -->
+                        <div class="sm:col-span-3">
+                            <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">First name</label>
+                            <div class="mt-2">
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ form.first_name.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Last Name -->
+                        <div class="sm:col-span-3">
+                            <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Last name <span class="text-red-500">*</span></label>
+                            <div class="mt-2">
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ form.last_name.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="sm:col-span-3">
+                            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Email address</label>
+                            <div class="mt-2">
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ form.email.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="sm:col-span-3">
+                            <label for="{{ form.phone.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Phone number</label>
+                            <div class="mt-2">
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ form.phone.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Address -->
+                        <div class="col-span-full">
+                            <label for="{{ form.address.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Address</label>
+                            <div class="mt-2">
+                                {{ form.address }}
+                                {% if form.address.errors %}
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ form.address.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Comments -->
+                        <div class="col-span-full">
+                            <label for="{{ form.comments.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Comments</label>
+                            <div class="mt-2">
+                                {{ form.comments }}
+                                {% if form.comments.errors %}
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ form.comments.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Add any additional notes about this owner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form actions -->
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <a href="{% url 'owner_list' %}" class="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Cancel</a>
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ button_text }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 
