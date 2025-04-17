@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Pulsar - Home{% endblock %}
+
+{% block header %}Welcome to Pulsar{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+        <h2 class="text-lg leading-6 font-medium text-gray-900">
+            Pulsar with Tailwind CSS
+        </h2>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            A Django application styled with Tailwind CSS.
+        </p>
+    </div>
+    <div class="border-t border-gray-200">
+        <div class="px-4 py-5 sm:p-6">
+            <p class="text-md text-gray-700">
+                This page is using Tailwind CSS for styling. Notice the clean, modern design with minimal effort.
+            </p>
+            <div class="mt-4">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Tailwind Button
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
