@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Django project with Tailwind CSS",
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css",
-    "watch:css": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch"
+    "build:css": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css",
+    "watch:css": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
   },
   "dependencies": {
-    "tailwindcss": "^4.1.0",
-    "@tailwindcss/cli": "^0.1.0"
+    "@tailwindcss/cli": "^0.1.2",
+    "tailwindcss": "^4.1.4"
   }
 }

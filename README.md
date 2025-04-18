@@ -16,7 +16,7 @@ A Django-based web application built with Django 5.2 and styled with Tailwind CS
    ```
 4. Install Node.js dependencies:
    ```
-   npm install
+   npm install tailwindcss @tailwindcss/cli
    ```
 5. Build the CSS:
    ```
