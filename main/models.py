@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from dateutil.relativedelta import relativedelta # Need this for age calculation
+# from dateutil.relativedelta import relativedelta # Need this for age calculation
 
 # Create your models here.
 
@@ -133,22 +133,28 @@ class Patient(models.Model):
             return _("Unknown")
         
         today = timezone.now().date()
-        # Use relativedelta for accurate age calculation considering months/days
-        delta = relativedelta(today, self.date_of_birth)
+        # Manual age calculation
+        years = today.year - self.date_of_birth.year - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
         
-        years = delta.years
-        months = delta.months
-        days = delta.days
-
         if years >= 1:
             # Translators: Age display format for years
             return _("%(years)d years") % {'years': years}
-        elif months >= 1:
-            # Translators: Age display format for months
-            return _("%(months)d months") % {'months': months}
         else:
-            # Translators: Age display format for days
-            return _("%(days)d days") % {'days': days}
+             # Calculate difference in months (approximation)
+            months = (today.year - self.date_of_birth.year) * 12 + today.month - self.date_of_birth.month
+            # Adjust month if the day hasn't been reached yet
+            if today.day < self.date_of_birth.day:
+                months -= 1
+            
+            if months >= 1:
+                # Translators: Age display format for months
+                return _("%(months)d months") % {'months': months}
+            else:
+                # Calculate difference in days
+                delta_days = (today - self.date_of_birth).days
+                 # Translators: Age display format for days
+                return _("%(days)d days") % {'days': delta_days}
+
     calculated_age.fget.short_description = _("Age") # Column header in Admin
 
     def __str__(self):
